@@ -7,6 +7,7 @@ export default function SearchBar(props) {
   const [breweries, setBreweries] = useState([])
   
   function handleSearchClick() {
+    setBreweries([])
     axios.get(`https://api.openweathermap.org/data/2.5/weather`,{
       params: {
         q: city,
@@ -31,6 +32,7 @@ export default function SearchBar(props) {
     })
     .then(function(response) {
       setBreweries(response.data)
+      setCity('')
     })
   }
   
