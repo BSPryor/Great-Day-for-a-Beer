@@ -1,10 +1,13 @@
 import axios from "axios"
 import { useState } from "react"
 import BreweryList from "./brewery_list"
+import RainyDay from "./rainyday"
+import Weather from "./weather"
 
 export default function SearchBar(props) {
   const [city, setCity] = useState('')
   const [breweries, setBreweries] = useState([])
+  const [weather, setWeather] = useState({})
   
   function handleSearchClick() {
     setBreweries([])
@@ -16,10 +19,12 @@ export default function SearchBar(props) {
       }
     })
     .then( function (response) {
+      setWeather(response.data)
+      
       if (response.data.weather[0].main === "Clouds" || response.data.weather[0].main === "Clear") {
         handleBrewerySearch();
       } else {
-        console.log('Sorry your weather sucks')
+        handleRainyDay()
       }
     })
   } 
@@ -35,6 +40,10 @@ export default function SearchBar(props) {
       setCity('')
     })
   }
+
+  function handleRainyDay() {
+    
+  }
   
   return (
     <div>
@@ -43,8 +52,10 @@ export default function SearchBar(props) {
           <input type='text' id='query' className='form-control' placeholder='Enter City' onChange={(e) => setCity(e.target.value)}></input>      
           <button className='button btn btn-primary' onClick={handleSearchClick}>Search</button>
         </div>
-      </div>
+       <Weather weather={weather} /> 
+      </div>      
       <BreweryList breweries={breweries}/>
+      <RainyDay />
     </div>
    
   )
