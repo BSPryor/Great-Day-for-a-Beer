@@ -1,8 +1,5 @@
 
 const BreweryList = function ({breweries}) {
-  if (breweries.length === 0) {
-    return null
-  }
   const list = function() {
     return breweries
     .filter(brewery => brewery.brewery_type !== 'brewpub' && brewery.brewery_type !== 'planning')
@@ -17,11 +14,11 @@ const BreweryList = function ({breweries}) {
   } 
 
   return (
-    <div className='row'>
-      <table className="table table-striped">
+    
+      <table className="table table-striped table-bordered">
         <tr className="thead-light">
-          <th>Brewery</th>
-          <th>Website</th>
+          <th scope="col">Brewery</th>
+          <th scope="col">Website</th>
         </tr>
         <tbody>
         {list()}
@@ -29,7 +26,7 @@ const BreweryList = function ({breweries}) {
       </table>
         
       
-    </div>
+    
   )
   
 }

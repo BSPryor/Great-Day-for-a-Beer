@@ -4,14 +4,22 @@ import BreweryList from "./brewery_list"
 import RainyDay from "./rainyday"
 import Weather from "./weather"
 
-export default function SearchBar(props) {
+export default function SearchBar() {
   const [city, setCity] = useState('')
   const [breweries, setBreweries] = useState([])
   const [weather, setWeather] = useState({})
-  
+
+  const [isRainy, setIsRainy] = useState(false)
+  const [isNice, setIsNice] = useState(false)
+  const [haveWeather, setHaveWeather] = useState(false)
+
   function handleSearchClick() {
+    setHaveWeather(false)
     setBreweries([])
     setWeather({})
+    setIsNice(false)
+    setIsRainy(false)
+
     axios.get(`https://api.openweathermap.org/data/2.5/weather`,{
       params: {
         q: city,
@@ -21,11 +29,13 @@ export default function SearchBar(props) {
     })
     .then( function (response) {
       setWeather(response.data)
-      
+      setHaveWeather(true)
+
       if (response.data.weather[0].main === "Clouds" || response.data.weather[0].main === "Clear") {
-        handleBrewerySearch();
+        setIsNice(true)
+        handleBrewerySearch()
       } else {
-        handleRainyDay()
+        setIsRainy(true)
       }
     })
   } 
@@ -41,10 +51,6 @@ export default function SearchBar(props) {
       setCity('')
     })
   }
-
-  function handleRainyDay() {
-    
-  }
   
   return (
     <div>
@@ -53,11 +59,12 @@ export default function SearchBar(props) {
           <input type='text' id='query' className='form-control' placeholder='Enter City' onChange={(e) => setCity(e.target.value)}></input>      
           <button className='button btn btn-primary' onClick={handleSearchClick}>Search</button>
         </div>
-       <Weather weather={weather} /> 
+       { haveWeather && <Weather weather={weather} />} 
       </div>
       <div className="col-md-6 offset-md-3">      
-      <BreweryList breweries={breweries}/>
-      <RainyDay weather={weather} />
+      { isNice && <BreweryList breweries={breweries}/>}
+      { isRainy && <RainyDay />}
+      
       </div>
     </div>   
   )
