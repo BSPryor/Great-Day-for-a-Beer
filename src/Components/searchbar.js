@@ -11,6 +11,7 @@ export default function SearchBar(props) {
   
   function handleSearchClick() {
     setBreweries([])
+    setWeather({})
     axios.get(`https://api.openweathermap.org/data/2.5/weather`,{
       params: {
         q: city,
@@ -53,10 +54,11 @@ export default function SearchBar(props) {
           <button className='button btn btn-primary' onClick={handleSearchClick}>Search</button>
         </div>
        <Weather weather={weather} /> 
-      </div>      
+      </div>
+      <div className="col-md-6 offset-md-3">      
       <BreweryList breweries={breweries}/>
-      <RainyDay />
-    </div>
-   
+      <RainyDay weather={weather} />
+      </div>
+    </div>   
   )
 }

@@ -1,3 +1,26 @@
 ul {
   list-style: none;
 }
+
+#icon {
+  width: 75%;
+  height: 25%;
+  margin-right: 25%;
+}
+
+h1 {
+  text-align: center;
+}
+
+.card {
+  text-align: center;
+  width: 50%;
+  margin-top: 10px;
+  border-width: 10px;
+  border: solid;
+  border-color: rgb(14, 221, 221);
+}
+
+.card-img-top {
+  margin-left: 100px;
+}

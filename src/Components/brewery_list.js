@@ -1,19 +1,34 @@
 
 const BreweryList = function ({breweries}) {
-
+  if (breweries.length === 0) {
+    return null
+  }
   const list = function() {
     return breweries
-    .filter(brewery => brewery.brewery_type !== 'brewpub')
+    .filter(brewery => brewery.brewery_type !== 'brewpub' && brewery.brewery_type !== 'planning')
     .map((brewery) => {
-      return <li key={brewery.id}> {brewery.name} <a href={brewery.website_url} alt='brewery url' target='_blank' rel="noreferrer">{brewery.website_url} </a></li>;
+      return (
+      <tr key={brewery.id}> 
+        <td>{brewery.name}</td> 
+        <td><a href={brewery.website_url} alt='brewery url' target='_blank' rel="noreferrer">{brewery.website_url} </a></td>
+      </tr>
+      )
     })
   } 
 
   return (
     <div className='row'>
-      <ul>
+      <table className="table table-striped">
+        <tr className="thead-light">
+          <th>Brewery</th>
+          <th>Website</th>
+        </tr>
+        <tbody>
         {list()}
-      </ul>
+        </tbody>
+      </table>
+        
+      
     </div>
   )
   

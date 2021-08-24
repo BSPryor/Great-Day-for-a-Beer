@@ -9,7 +9,6 @@ function App() {
       <h1>A Great Day for A Beer</h1>
       <hr></hr>
       <SearchBar />
-      <hr></hr>
     </div>
     
 
