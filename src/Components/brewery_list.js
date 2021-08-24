@@ -2,7 +2,7 @@
 const BreweryList = function ({breweries}) {
   const list = function() {
     return breweries
-    .filter(brewery => brewery.brewery_type !== 'brewpub' && brewery.brewery_type !== 'planning')
+    .filter(brewery => brewery.brewery_type !== 'planning')
     .map((brewery) => {
       return (
       <tr key={brewery.id}> 

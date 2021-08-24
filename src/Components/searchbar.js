@@ -12,6 +12,8 @@ export default function SearchBar() {
   const [isRainy, setIsRainy] = useState(false)
   const [isNice, setIsNice] = useState(false)
   const [haveWeather, setHaveWeather] = useState(false)
+  
+  const locationKey = 'pk.dd1e23a8ff06ec9ba7e15a2eeff5c167';
 
   function handleSearchClick() {
     setHaveWeather(false)
@@ -51,13 +53,37 @@ export default function SearchBar() {
       setCity('')
     })
   }
+
+  function handleGeolocate() {
+    if(navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition( (position) => {
+        axios.get('https://us1.locationiq.com/v1/reverse.php?', {
+          params: {
+            key : locationKey,
+            lat: position.coords.latitude,
+            lon: position.coords.longitude,
+            format: 'json'
+          }
+        })
+          .then(function(response) {
+            setCity(response.data.address.city)
+          })
+          .then(function() {
+            handleSearchClick();
+          })
+     })
+    }
+  }
   
+
+
   return (
     <div>
       <div className='col-md-6 offset-md-3'> 
         <div className='input-group'>
           <input type='text' id='query' className='form-control' placeholder='Enter City' onChange={(e) => setCity(e.target.value)}></input>      
           <button className='button btn btn-primary' onClick={handleSearchClick}>Search</button>
+          <button className='button btn btn-success' onClick={handleGeolocate}>Locate Me!</button>
         </div>
        { haveWeather && <Weather weather={weather} />} 
       </div>
