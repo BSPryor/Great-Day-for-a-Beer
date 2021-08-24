@@ -68,9 +68,9 @@ export default function SearchBar() {
           .then(function(response) {
             setCity(response.data.address.city)
           })
-          .then(function() {
-            handleSearchClick();
-          })
+          .then(() =>
+            handleSearchClick()
+          )          
      })
     }
   }
