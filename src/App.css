@@ -2,12 +2,6 @@ ul {
   list-style: none;
 }
 
-#icon {
-  width: 75%;
-  height: 25%;
-  margin-right: 25%;
-}
-
 h1 {
   text-align: center;
 }
@@ -21,6 +15,23 @@ h1 {
   border-color: rgb(14, 221, 221);
 }
 
-.card-img-top {
-  margin-left: 100px;
+.map-container {
+  height: 50vh;
+  width: 50vh;
+}
+
+.mapboxgl-marker {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 1px solid gray;
+  background-color: lightblue;
+}
+
+.popup {
+  color: maroon;
+}
+
+.table {
+  border-radius: 4px;
 }

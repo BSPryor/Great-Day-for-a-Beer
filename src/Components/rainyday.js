@@ -25,7 +25,7 @@ const RainyDay = function () {
       },
       headers: {
         'x-rapidapi-host': 'free-to-play-games-database.p.rapidapi.com',
-        'x-rapidapi-key': 'f2872f2fddmsh8109582059b770dp1b689ejsn6ecf3bc1f0a8'
+        'x-rapidapi-key': process.env.REACT_APP_GAMES_KEY
       }
     };
 

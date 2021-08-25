@@ -1,6 +1,10 @@
 import 'bootstrap/dist/css/bootstrap.css';
+import 'mapbox-gl/dist/mapbox-gl.css';
 import './App.css';
 import SearchBar from './Components/searchbar';
+
+
+require('dotenv').config()
 
 function App() {
 

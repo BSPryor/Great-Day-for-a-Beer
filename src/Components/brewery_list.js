@@ -1,5 +1,6 @@
+import BreweryMap from './map';
 
-const BreweryList = function ({breweries}) {
+const BreweryList = function ({breweries, coords}) {
   const list = function() {
     return breweries
     .filter(brewery => brewery.brewery_type !== 'planning')
@@ -14,8 +15,8 @@ const BreweryList = function ({breweries}) {
   } 
 
   return (
-    
-      <table className="table table-striped table-bordered">
+    <div>
+      <table className="table table-striped table-bordered rounded">
         <thead className="thead-light">
           <tr >
             <th scope="col">Brewery</th>
@@ -27,8 +28,9 @@ const BreweryList = function ({breweries}) {
         {list()}
         </tbody>
       </table>
-        
       
+      <BreweryMap breweries={breweries} coords={coords}/>
+    </div>   
     
   )
   
