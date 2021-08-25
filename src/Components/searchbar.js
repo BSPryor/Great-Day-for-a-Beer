@@ -4,6 +4,7 @@ import BreweryList from "./brewery_list"
 import RainyDay from "./rainyday"
 import Weather from "./weather"
 
+
 export default function SearchBar() {
   const [city, setCity] = useState('')
   const [breweries, setBreweries] = useState([])
@@ -12,8 +13,13 @@ export default function SearchBar() {
   const [isRainy, setIsRainy] = useState(false)
   const [isNice, setIsNice] = useState(false)
   const [haveWeather, setHaveWeather] = useState(false)
+  const [loadGeo, setLoadGeo] = useState(false)
   
   const locationKey = 'pk.dd1e23a8ff06ec9ba7e15a2eeff5c167';
+  if (loadGeo) {
+    handleSearchClick();
+    setLoadGeo(false)
+  }
 
   function handleSearchClick() {
     setHaveWeather(false)
@@ -32,7 +38,7 @@ export default function SearchBar() {
     .then( function (response) {
       setWeather(response.data)
       setHaveWeather(true)
-
+      
       if (response.data.weather[0].main === "Clouds" || response.data.weather[0].main === "Clear") {
         setIsNice(true)
         handleBrewerySearch()
@@ -42,10 +48,12 @@ export default function SearchBar() {
     })
   } 
 
+
   function handleBrewerySearch() {
+    
     axios.get(`https://api.openbrewerydb.org/breweries`,{
       params: {
-        by_city: city,
+        by_city: city
       }
     })
     .then(function(response) {
@@ -53,6 +61,7 @@ export default function SearchBar() {
       setCity('')
     })
   }
+  
 
   function handleGeolocate() {
     if(navigator.geolocation) {
@@ -65,12 +74,11 @@ export default function SearchBar() {
             format: 'json'
           }
         })
-          .then(function(response) {
+          .then((response) => {
             setCity(response.data.address.city)
+            setLoadGeo(true)
           })
-          .then(() =>
-            handleSearchClick()
-          )          
+                   
      })
     }
   }

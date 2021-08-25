@@ -16,10 +16,13 @@ const BreweryList = function ({breweries}) {
   return (
     
       <table className="table table-striped table-bordered">
-        <tr className="thead-light">
-          <th scope="col">Brewery</th>
-          <th scope="col">Website</th>
-        </tr>
+        <thead className="thead-light">
+          <tr >
+            <th scope="col">Brewery</th>
+            <th scope="col">Website</th>
+          </tr>
+        </thead>
+        
         <tbody>
         {list()}
         </tbody>
