@@ -37,7 +37,7 @@ h1 {
 }
 
 .table {
-  border-radius: 4px;
+  border-radius: 5px;
   color: white;
 }
 
@@ -57,4 +57,17 @@ h1 {
   background-image: url("https://live.staticflickr.com/4701/39962102384_7e11a4c980_b.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.next-clear {
+  border: solid;
+  margin: 5px;
+  border-radius: 5px;
+  padding: 5px;
+  text-align: center;
+  border-color: rgb(14, 221, 221);
+}
+
+.weather {
+  border-radius: 5px;
 }

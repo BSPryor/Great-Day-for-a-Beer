@@ -26,7 +26,7 @@ const BreweryMap = ( {breweries, coords} ) => {
         
       >
         {breweries
-        .filter(brewery => brewery.longitude !== null)
+        .filter(brewery => brewery.longitude !== null && brewery.brewery_type !== 'planning' && brewery.brewery_type !== 'contract')
         .map(brewery => (
           <Marker key={brewery.id} latitude={parseFloat(brewery.latitude)} longitude={parseFloat(brewery.longitude)}>
             <button

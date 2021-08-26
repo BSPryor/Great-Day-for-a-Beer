@@ -2,16 +2,34 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import GamesList from "./gamelist";
 
-const RainyDay = function () {
+const RainyDay = function ({coords}) {
   const [selection, setSelection] = useState('shooter')
   const [hasGames, setHasGames] = useState(false)
   const [games, setGames] = useState([])
+  const [forecast, setForecast] = useState({dt_txt: '0'})
 
-    useEffect(() => {
-      // document.body.style.backgroundColor = "lightblue"
+
+    useEffect(() => {      
       document.body.className += "rainy"
-      
+      getForecast();
+       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+    function getForecast() {
+      axios.get('https://api.openweathermap.org/data/2.5/forecast?' , {
+        params: {
+          lat: coords.lat,
+          lon: coords.lon,
+          appid: process.env.REACT_APP_WEATHER_KEY
+        }
+      })
+      .then(function(response){        
+        const goodTime = response.data.list
+          .filter(w => w.weather[0].main === 'Clear' || w.weather[0].main === "Clouds")
+          .find(w => w.dt_txt[11] !== '0')
+        setForecast(goodTime);
+      })
+    }
 
     function handleClick() {
       axios.request(getGames).then(function (response) {
@@ -38,9 +56,12 @@ const RainyDay = function () {
     function handleChange(e) {
       setSelection(e.target.value)
     }
-
+  
     return (
       <div className="rainy-table">
+        <div className='next-clear'>
+          <h2>The next time it will be clear to go to a brewery is {forecast.dt_txt.substring(11, 16)} on {forecast.dt_txt.substring(5,10)}</h2>
+        </div>
         <form>
           <label htmlFor="game-type">What kind of game do you want to play?  
             <select name="game-type" onChange={handleChange}>

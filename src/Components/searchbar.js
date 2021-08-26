@@ -15,6 +15,8 @@ export default function SearchBar() {
   const [isNice, setIsNice] = useState(false)
   const [haveWeather, setHaveWeather] = useState(false)
   const [loadGeo, setLoadGeo] = useState(false)
+  
+ 
 
   if (loadGeo) {
     handleSearchClick();
@@ -42,24 +44,23 @@ export default function SearchBar() {
       setCoords({
         lat: response.data.coord.lat,
         lon: response.data.coord.lon
-      })
-
-      
-      if (response.data.weather[0].main === "Clouds" || response.data.weather[0].main === "Clear") {
-        setIsNice(true)
-        handleBrewerySearch()
-      } else {
+      })    
+    const coordsUrl = `${response.data.coord.lat},${response.data.coord.lon}`  
+     if (response.data.weather[0].main === "Clouds" || response.data.weather[0].main === "Clear") {
+      setIsNice(true)
+      handleBrewerySearch(coordsUrl)
+    } else {
         setIsRainy(true)
-      }
-    })
+    }
+  })
+    
   } 
 
-
-  function handleBrewerySearch() {
+  function handleBrewerySearch(coordsUrl) {
     
     axios.get(`https://api.openbrewerydb.org/breweries`,{
       params: {
-        by_city: city
+        by_dist: coordsUrl
       }
     })
     .then(function(response) {
@@ -103,7 +104,7 @@ export default function SearchBar() {
       </div>
       <div className="col-md-6 offset-md-3">      
       { isNice && <BreweryList breweries={breweries} coords={coords}/>}
-      { isRainy && <RainyDay />}
+      { isRainy && <RainyDay coords={coords}/>}
       
       </div>
     </div>   
