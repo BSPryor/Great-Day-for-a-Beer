@@ -1,11 +1,9 @@
-// import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import ReactMapGL, { Marker, Popup } from 'react-map-gl'
 import React, { useState } from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import { faBeer } from '@fortawesome/free-solid-svg-icons'
 
 const BreweryMap = ( {breweries, coords} ) => {
-  // const [zoom, setZoom] = useState(10)
   const [viewport, setViewport] = useState({
     latitude: coords.lat,
     longitude: coords.lon,
@@ -38,8 +36,8 @@ const BreweryMap = ( {breweries, coords} ) => {
                 setSelectedBrewery(brewery);
               }}
               >
-                <FontAwesomeIcon icon={faBeer}/>
-              </button>
+              <FontAwesomeIcon icon={faBeer}/>
+            </button>
           </Marker>
         ))}
 
@@ -60,7 +58,6 @@ const BreweryMap = ( {breweries, coords} ) => {
             </div>
           </Popup>
           ) : null}
-        {/* )} */}
       </ReactMapGL>
 
     </div>

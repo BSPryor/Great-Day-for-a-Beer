@@ -1,11 +1,14 @@
-ul {
-  list-style: none;
-}
-
 h1 {
   text-align: center;
 }
 
+.a-sunny {
+  color: rgb(226, 230, 16);
+}
+
+.a-rainy {
+  color: rgb(199, 21, 21);
+}
 .card {
   text-align: center;
   width: 50%;
@@ -13,6 +16,7 @@ h1 {
   border-width: 10px;
   border: solid;
   border-color: rgb(14, 221, 221);
+  background-color: cornflowerblue;
 }
 
 .map-container {
@@ -34,4 +38,23 @@ h1 {
 
 .table {
   border-radius: 4px;
+  color: white;
+}
+
+.rainy {
+  background-color: lightblue;
+  font-size: large;
+  font-weight: bold;
+  color: white;
+  background-image: url("https://images.unsplash.com/photo-1611738740585-3598e06e0f8c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1504&q=80");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.sunny {
+  background-color: linen;
+  color: white;
+  background-image: url("https://live.staticflickr.com/4701/39962102384_7e11a4c980_b.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }

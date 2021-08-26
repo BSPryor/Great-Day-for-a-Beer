@@ -22,6 +22,7 @@ export default function SearchBar() {
   }
 
   function handleSearchClick() {
+    document.body.className = ''
     setHaveWeather(false)
     setBreweries([])
     setWeather({})

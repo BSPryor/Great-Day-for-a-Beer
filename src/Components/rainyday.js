@@ -1,11 +1,17 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import GamesList from "./gamelist";
 
 const RainyDay = function () {
   const [selection, setSelection] = useState('shooter')
   const [hasGames, setHasGames] = useState(false)
   const [games, setGames] = useState([])
+
+    useEffect(() => {
+      // document.body.style.backgroundColor = "lightblue"
+      document.body.className += "rainy"
+      
+    }, [])
 
     function handleClick() {
       axios.request(getGames).then(function (response) {
@@ -34,9 +40,9 @@ const RainyDay = function () {
     }
 
     return (
-      <div>
+      <div className="rainy-table">
         <form>
-          <label htmlFor="game-type">What kind of game do you want to play?
+          <label htmlFor="game-type">What kind of game do you want to play?  
             <select name="game-type" onChange={handleChange}>
             
               <option value="shooter">Shooter</option>
@@ -48,7 +54,7 @@ const RainyDay = function () {
                        
             </select>
           </label>
-        <button type="button" value="Submit" onClick={handleClick} >Search for Games and Drinks!</button>
+        <button type="button" value="Submit" onClick={handleClick} >Search for Games</button>
       </form>
       { hasGames && <GamesList games={games} />}
     </div>

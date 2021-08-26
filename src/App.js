@@ -9,7 +9,7 @@ require('dotenv').config()
 function App() {
 
   return (
-    <div className="App container">
+    <div className="App container" >
       <h1>A Great Day for A Beer</h1>
       <hr></hr>
       <SearchBar />
