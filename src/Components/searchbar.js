@@ -1,5 +1,5 @@
 import axios from "axios"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import BreweryList from "./brewery_list"
 import RainyDay from "./rainyday"
 import Weather from "./weather"
@@ -14,14 +14,12 @@ export default function SearchBar() {
   const [isRainy, setIsRainy] = useState(false)
   const [isNice, setIsNice] = useState(false)
   const [haveWeather, setHaveWeather] = useState(false)
-  const [loadGeo, setLoadGeo] = useState(false)
+  const [loadGeo, setLoadGeo] = useState()
   
- 
-
   if (loadGeo) {
     handleSearchClick();
     setLoadGeo(false)
-  }
+  }  
 
   function handleSearchClick() {
     document.body.className = ''
@@ -90,13 +88,23 @@ export default function SearchBar() {
     }
   }
   
-
+  const checkIfEnter = function (event) {
+    if (event.keyCode === 13) {
+      handleSearchClick();
+    }
+  }
 
   return (
     <div className="container-fluid">
       <div className='col-md-6 offset-md-3'> 
         <div className='input-group'>
-          <input type='text' id='query' className='form-control' placeholder='Enter City' onChange={(e) => setCity(e.target.value)}></input>      
+          <input 
+          type='text' 
+          id='query' 
+          className='form-control' 
+          placeholder='Enter City' onChange={(e) => setCity(e.target.value)}
+          onKeyUp={checkIfEnter}
+          ></input>      
           <button className='button btn btn-primary' onClick={handleSearchClick}>Search</button>
           <button className='button btn btn-success' onClick={handleGeolocate}>Locate Me!</button>
         </div>
