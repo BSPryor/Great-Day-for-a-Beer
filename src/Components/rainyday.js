@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import GamesList from "./gamelist";
+import Moment from "react-moment";
+import 'moment-timezone'
 
 const RainyDay = function ({coords}) {
   const [selection, setSelection] = useState('shooter')
@@ -60,7 +62,7 @@ const RainyDay = function ({coords}) {
     return (
       <div className="rainy-table">
         <div className='next-clear'>
-          <h2>The next time it will be clear to go to a brewery is {forecast.dt_txt.substring(11, 16)} on {forecast.dt_txt.substring(5,10)}</h2>
+          <h2>The next time it will be clear to go to a brewery is <Moment unix format="h:mm a" tz="America/New_York" >{forecast.dt}</Moment> Eastern</h2>
         </div>
         <form>
           <label htmlFor="game-type">What kind of game do you want to play?  

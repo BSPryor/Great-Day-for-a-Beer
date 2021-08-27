@@ -93,7 +93,7 @@ export default function SearchBar() {
 
 
   return (
-    <div>
+    <div className="container-fluid">
       <div className='col-md-6 offset-md-3'> 
         <div className='input-group'>
           <input type='text' id='query' className='form-control' placeholder='Enter City' onChange={(e) => setCity(e.target.value)}></input>      
